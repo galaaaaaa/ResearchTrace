@@ -1,0 +1,15 @@
+# 研究方案设计技能：假设拆解 → 数据与基线检查 → 消融要求 → 风险与备选
+name: experiment_design
+version: "0.1"
+status: enabled
+trigger: "用户要求设计实验方案或消融验证方案"
+actions:
+  - decompose_hypotheses
+  - check_data_and_baselines
+  - require_ablation
+  - assess_risks_and_alternates
+evaluation:
+  - evidence_coverage
+  - feasibility_check
+notes: "假设拆解（decompose_hypotheses）、数据与基线检查（check_data_and_baselines）、消融要求（require_ablation）、风险与备选（assess_risks_and_alternates）；方案中的每个假设须绑定可验证的评测口径。"
+created_from: []

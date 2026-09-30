@@ -1,0 +1,32 @@
+[project]
+name = "research-agent"
+version = "0.1.0"
+description = "科研助手 Agent：选题调研、论文精读、文献综述与研究方案设计（Scope→Plan→Research→Gap→Write→Verify）"
+requires-python = ">=3.10"
+dependencies = [
+    "langgraph>=0.2.60",
+    "langchain-core>=0.3.29",
+    "langchain-anthropic>=0.3.3",
+    "langchain-openai>=0.3.0",
+    "pydantic>=2.9",
+    "pydantic-settings>=2.6",
+    "httpx>=0.27",
+    "pymupdf>=1.24",
+    "tenacity>=8.5",
+    "rapidfuzz>=3.10",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+# PaperQA2 为可选精读后端；未安装时自动回退到内置 pdf_tool（PyMuPDF+BM25）
+# 注意：PyPI 上 paper-qa 最新为 4.9.0，旧约束 >=5.2 无法满足、安装必失败
+paperqa = ["paper-qa>=4.9,<5"]
+# Milvus Lite 向量知识库（📚 全库问答）；未安装时 vector_store 全链路优雅降级为跳过
+kb = ["pymilvus[milvus_lite]>=2.4"]
+dev = ["pytest>=8.3", "pytest-timeout>=2.3"]
+# 轻量 Web 界面（webapp.py）
+web = ["fastapi>=0.110", "uvicorn>=0.29"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

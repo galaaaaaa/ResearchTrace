@@ -1,0 +1,40 @@
+{
+  "description": "自建评测集样例：固定问题 + 金标要点（key_points）与必须引用的论文线索（must_cite_papers 为题名片段，允许模糊匹配）",
+  "questions": [
+    {
+      "id": "vlm-post-training",
+      "query": "视觉语言模型（VLM）后训练方法（SFT、DPO、GRPO）的对比与争议",
+      "paper_types": ["survey", "full-paper"],
+      "time_range": "2023-2026",
+      "gold": {
+        "key_points": [
+          "SFT 通过监督微调拟合指令数据，是后训练的基础手段",
+          "DPO 绕过显式奖励模型直接优化偏好",
+          "GRPO 使用组内相对奖励进行策略优化",
+          "不同方法在评测基准上的对比口径（数据集/指标）存在差异",
+          "RL 后训练存在 reward hacking / 灾难性遗忘 / 训练不稳定等负结果",
+          "哪些结论有消融实验支撑需要区分"
+        ],
+        "must_cite_papers": [
+          "Direct Preference Optimization",
+          "DeepSeekMath",
+          "DeepSeek-R1"
+        ]
+      }
+    },
+    {
+      "id": "rag-citation-quality",
+      "query": "检索增强生成（RAG）中的引用质量与忠实性问题",
+      "paper_types": ["full-paper"],
+      "time_range": "2023-2026",
+      "gold": {
+        "key_points": [
+          "RAG 系统的引用可能出现伪引用或引用与陈述不匹配",
+          "引用评价存在 precision/recall 等指标",
+          "生成忠实性（faithfulness）与检索质量的权衡"
+        ],
+        "must_cite_papers": []
+      }
+    }
+  ]
+}

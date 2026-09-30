@@ -1,0 +1,30 @@
+# 预算与停止条件：避免无止境调研。
+defaults:
+  # 每轮 Supervisor 派发
+  max_tasks_initial: 8          # Perspective Planner 首轮最多子问题数
+  max_tasks_per_round: 4        # gap/repair 轮次每轮新增任务上限
+  max_concurrent_researchers: 4 # LangGraph Send 并发上限
+  max_tool_calls_per_researcher: 5
+  researcher_timeout_s: 420
+
+  # 全局循环上限（达到上限仍缺证据 → 报告中明确标注，不再循环）
+  max_research_rounds: 2
+  max_repair_rounds: 2
+
+  # LLM 全局预算
+  llm_max_calls: 500
+  llm_max_input_tokens: 6000000
+  llm_max_output_tokens: 1500000
+
+  # 搜索与下载
+  max_papers_per_task: 8
+  max_pdfs_downloaded_per_task: 5
+  similar_query_stop: 0.85      # 相邻两次搜索词相似度超过阈值 → 提前停止
+  max_pdf_pages: 80
+
+  # 上下文装配
+  context_token_budget: 24000
+
+  # Writer / Verifier
+  max_claims_per_report: 60
+  max_judge_calls_per_verification: 80

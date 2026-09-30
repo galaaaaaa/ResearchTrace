@@ -1,0 +1,83 @@
+# 模型接入配置：provider + 角色（role）两级。
+# 支持多 provider 切换：anthropic 兼容端点（智谱 BigModel/Claude）或 OpenAI 兼容端点（云模型/本地 vLLM）。
+# 密钥一律走环境变量，绝不写入仓库。
+
+default_provider: anthropic_main
+
+providers:
+  anthropic_main:
+    type: anthropic
+    base_url: ${ANTHROPIC_BASE_URL:-https://open.bigmodel.cn/api/anthropic}
+    api_key_env: ANTHROPIC_AUTH_TOKEN
+    request_timeout_s: 180
+
+  openai_main:
+    type: openai
+    base_url: ${OPENAI_BASE_URL:-}
+    api_key_env: OPENAI_API_KEY
+    request_timeout_s: 180
+
+  # 离线测试/CI 用：不发任何网络请求
+  fake:
+    type: fake
+
+# 角色配置：provider + 生成参数。切换本地模型只需改 provider 与 model。
+roles:
+  _default:
+    provider: anthropic_main
+    model: ${ANTHROPIC_MODEL:-glm-5.3}
+    temperature: 0.2
+    max_tokens: 4096
+
+  # Scope / Planner / Supervisor：结构化决策
+  orchestrator:
+    provider: anthropic_main
+    model: ${ANTHROPIC_MODEL:-glm-5.3}
+    temperature: 0.2
+    max_tokens: 6144
+
+  # Searcher / Reader：查询生成与证据抽取
+  researcher:
+    provider: anthropic_main
+    model: ${ANTHROPIC_MODEL:-glm-5.3}
+    temperature: 0.2
+    max_tokens: 6144
+
+  analyst:
+    provider: anthropic_main
+    model: ${ANTHROPIC_MODEL:-glm-5.3}
+    temperature: 0.2
+    max_tokens: 6144
+
+  critic:
+    provider: anthropic_main
+    model: ${ANTHROPIC_MODEL:-glm-5.3}
+    temperature: 0.3
+    max_tokens: 4096
+
+  writer:
+    provider: anthropic_main
+    model: ${ANTHROPIC_MODEL:-glm-5.3}
+    temperature: 0.3
+    max_tokens: 12288
+
+  # Citation Verifier 的独立 Judge：只判断证据是否支撑结论
+  judge:
+    provider: anthropic_main
+    model: ${ANTHROPIC_MODEL:-glm-5.3}
+    temperature: 0.0
+    max_tokens: 3072
+
+  # 图/表/公式多模态解读（需支持视觉输入；不支持时 figure_tool 自动跳过）
+  vision:
+    provider: anthropic_main
+    model: ${ANTHROPIC_MODEL:-glm-5.3}
+    temperature: 0.1
+    max_tokens: 3072
+
+  # 轻量任务：去重判断、摘要压缩
+  fast:
+    provider: anthropic_main
+    model: ${ANTHROPIC_MODEL:-glm-5.3}
+    temperature: 0.0
+    max_tokens: 2048

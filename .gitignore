@@ -1,0 +1,18 @@
+# 密钥与本地配置
+.env
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+# 运行产物（保留目录，忽略内容）
+data/papers/*
+!data/papers/.gitkeep
+data/indexes/*
+!data/indexes/.gitkeep
+data/traces/*
+!data/traces/.gitkeep
+outputs/reports/*
+!outputs/reports/.gitkeep
+outputs/audit/*
+!outputs/audit/.gitkeep

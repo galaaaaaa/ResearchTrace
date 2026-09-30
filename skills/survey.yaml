@@ -1,0 +1,15 @@
+# 文献综述技能：多视角拆解 → 时间线梳理 → 争议呈现 → 覆盖检查
+name: survey
+version: "0.1"
+status: enabled
+trigger: "用户要求文献综述、梳理研究脉络或多视角调研"
+actions:
+  - decompose_perspectives
+  - build_timeline
+  - present_controversies
+  - check_coverage
+evaluation:
+  - evidence_coverage
+  - citation_precision
+notes: "多视角拆解（decompose_perspectives）、时间线梳理（build_timeline）、争议呈现（present_controversies）、覆盖检查（check_coverage）；综述中的每条结论必须映射到 EvidenceRecord，缺证据的脉络判断要显式标注。"
+created_from: []

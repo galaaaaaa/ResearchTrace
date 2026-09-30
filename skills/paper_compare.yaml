@@ -1,0 +1,16 @@
+# 方法比较技能：源自设计文档 §10 compare_methods 示例
+name: paper_compare
+version: "0.1"
+status: enabled
+trigger: "用户要求比较两个及以上方法"
+actions:
+  - enforce_shared_dataset_check
+  - require_metric_definition
+  - spawn_critic_agent
+  - use_comparison_table_template
+evaluation:
+  - citation_precision
+  - evidence_coverage
+  - comparison_completeness
+notes: "比较类请求先检查数据集与指标可比性（enforce_shared_dataset_check / require_metric_definition）；不可比处写入 ComparisonMatrix.comparability_warnings，不得直接横向比较；由 critic 复核并使用统一对比表模板。"
+created_from: []

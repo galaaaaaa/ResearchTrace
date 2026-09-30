@@ -1,0 +1,43 @@
+# 数据源配置。enabled: false 可整体禁用某一来源（离线场景只读本地 PDF）。
+arxiv:
+  enabled: true
+  base_url: "https://export.arxiv.org/api/query"
+  request_timeout_s: 25
+  max_results_default: 10
+  pdf_base: "https://arxiv.org/pdf"
+
+semantic_scholar:
+  enabled: true
+  base_url: "https://api.semanticscholar.org/graph/v1"
+  api_key_env: SEMANTIC_SCHOLAR_API_KEY
+  request_timeout_s: 25
+  max_results_default: 10
+  rate_limit_s: 1.2
+
+crossref:
+  enabled: true
+  base_url: "https://api.crossref.org"
+  mailto: "research-agent@example.org"   # polite pool
+  request_timeout_s: 25
+
+pdf:
+  chunk_chars: 1400
+  chunk_overlap: 160
+  min_chunk_chars: 180
+  scanned_text_threshold: 120   # 每页平均可提取字符低于此值视为扫描件
+
+vision:
+  enabled: true                  # false 时 figure_tool 直接跳过 VLM 调用
+  max_figures_per_paper: 4
+  min_figure_area_ratio: 0.05    # 图区域占页面比例下限（过滤噪声小图）
+
+web_search:
+  # Searcher 正式工具 search_web_literature（AnySearch 学术垂直域）；
+  # 对话 🌐 的 search_web 不受此开关影响（它由 WEB_SEARCH_PROVIDER/密钥决定）
+  enable_for_research: true
+  academic_tag: "academic.search"   # academic.search 跨学科 / academic.preprint 预印本 / academic.biomedical 生医（须用 sub-domains 的 sub_domain 原值，拼域前缀会 400）
+
+search:
+  download_pdfs: true
+  prefer_sources: ["arxiv", "publisher", "author_repo"]
+  blog_policy: "lead_only"       # 博客只用于发现线索，不作为核心结论唯一证据
