@@ -5,7 +5,7 @@
 面向**选题调研、论文精读、文献综述与研究方案设计**。它不只是"生成一份像综述的文档"——正文引用 `[n:页码]` 可定位到 PDF 原文，所有结论经过四层核验，**核验不过的结论如实标注而非删除，证据不足的缺口如实披露而非掩盖**。
 
 <p align="center">
-  <img src="docs/images/02_report.png" alt="报告视图：统计卡片 + 核验标签 + 页码引用 + 参考文献" width="860">
+  <img src="docs/images/00_traceability.png" alt="研究溯源信息图：研究问题 → 检索 → 精读 → 证据库 → 四层核验 → 报告，每条结论回溯到 PDF 原文" width="860">
 </p>
 
 ## ✨ 核心特性
@@ -40,12 +40,8 @@
 
 ## 🏗️ 架构
 
-<p align="center">
-  <img src="docs/images/06_pipeline.png" alt="多智能体文献调研流程图" width="860">
-</p>
-
 <details>
-<summary>文字版流程</summary>
+<summary>流程总览（文字版）</summary>
 
 ```
 ┌──────────────────────── 研究管线（src/graph.py，LangGraph）────────────────────────┐
